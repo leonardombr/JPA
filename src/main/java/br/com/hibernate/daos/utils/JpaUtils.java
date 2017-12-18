@@ -7,17 +7,22 @@ import javax.persistence.Persistence;
 public class JpaUtils {
 	
 	private static String NOME_PERSISTENCE_UNIT = "jpa";
-	private static EntityManager em;
+	private static JpaUtils instancia;
+	private EntityManagerFactory factory;
 	
 	private JpaUtils() {
-		
+		factory = Persistence.createEntityManagerFactory(NOME_PERSISTENCE_UNIT);
 	}
 
-	public static EntityManager getInstance() {
-		if(em == null) {
-			EntityManagerFactory defaultEmf = Persistence.createEntityManagerFactory(NOME_PERSISTENCE_UNIT);
-			em = defaultEmf.createEntityManager();
+	public static JpaUtils getInstance() {
+		if (instancia == null){
+			instancia = new JpaUtils();
 		}
-		return em;
+		return instancia;
 	}
+	
+	public EntityManager getEm(){
+		return this.factory.createEntityManager();
+	}
+	
 }

@@ -16,7 +16,7 @@ public class TurmaDao {
 
 	public static List<Turma> all(){
 		try {
-			em = JpaUtils.getInstance();
+			em = JpaUtils.getInstance().getEm();
 			Query q = em.createQuery("SELECT turma FROM Turma turma");
 			List<Turma> listaTurma = q.getResultList();
 			return listaTurma;	
@@ -30,7 +30,7 @@ public class TurmaDao {
 	
 	public static Turma getTurmaById(Long id) {
 		try {
-			em = JpaUtils.getInstance();
+			em = JpaUtils.getInstance().getEm();
 			em.getTransaction().begin();
 			return em.find(Turma.class, id);			
 		} catch (Exception e) {
@@ -43,7 +43,7 @@ public class TurmaDao {
 	
 	public static void inserir(Turma turma) {
 		try {
-			em = JpaUtils.getInstance();
+			em = JpaUtils.getInstance().getEm();
 			tx = em.getTransaction();
 			tx.begin();
 			em.persist(turma);
@@ -59,7 +59,7 @@ public class TurmaDao {
 	
 	public static void atualizar(Turma turma) {
 		try {
-			em = JpaUtils.getInstance();
+			em = JpaUtils.getInstance().getEm();
 			tx = em.getTransaction();
 			tx.begin();
 			em.merge(turma);
@@ -75,7 +75,7 @@ public class TurmaDao {
 	
 	public static void excluir(Turma turma) {
 		try {
-			em = JpaUtils.getInstance();
+			em = JpaUtils.getInstance().getEm();
 			tx = em.getTransaction();
 			tx.begin();		
 			em.remove(em.merge(turma));

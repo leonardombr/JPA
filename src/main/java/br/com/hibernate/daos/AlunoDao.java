@@ -16,7 +16,7 @@ public class AlunoDao {
 
 	public static List<Aluno> all(){
 		try {
-			em = JpaUtils.getInstance();
+			em = JpaUtils.getInstance().getEm();
 			Query q = em.createQuery("SELECT aluno FROM Aluno aluno");
 			List<Aluno> listaAlunos = q.getResultList();
 			return listaAlunos;		
@@ -30,7 +30,7 @@ public class AlunoDao {
 	
 	public static Aluno getAlunoById(Long id){
 		try {
-			em = JpaUtils.getInstance();		
+			em = JpaUtils.getInstance().getEm();		
 			return em.find(Aluno.class, (long)id);					
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -42,7 +42,7 @@ public class AlunoDao {
 	
 	public static void inserir(Aluno aluno) {
 		try {
-			em = JpaUtils.getInstance();
+			em = JpaUtils.getInstance().getEm();
 			tx = em.getTransaction();
 			tx.begin();
 			em.persist(aluno);
@@ -58,7 +58,7 @@ public class AlunoDao {
 	
 	public static void atualizar(Aluno aluno) {
 		try {
-			em = JpaUtils.getInstance();
+			em = JpaUtils.getInstance().getEm();
 			tx = em.getTransaction();
 			tx.begin();
 			em.merge(aluno);
@@ -74,7 +74,7 @@ public class AlunoDao {
 	
 	public static void excluir(Aluno aluno) {
 		try {
-			em = JpaUtils.getInstance();
+			em = JpaUtils.getInstance().getEm();
 			tx = em.getTransaction();
 			tx.begin();
 			em.remove(em.merge(aluno));

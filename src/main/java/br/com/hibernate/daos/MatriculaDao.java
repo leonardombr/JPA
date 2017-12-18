@@ -15,7 +15,7 @@ public class MatriculaDao {
 	
 	public static void inserir(Aluno aluno, Turma turma) {
 		try {
-			em = JpaUtils.getInstance();
+			em = JpaUtils.getInstance().getEm();
 			tx = em.getTransaction();
 			AlunoTurma matricula = new AlunoTurma();
 			matricula.setAluno(aluno);
